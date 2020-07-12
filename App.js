@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-import ListingDetails from './app/screens/ListingDetails';
-import Account from './app/screens/Account';
-import ListingEdit from './app/screens/ListingEdit';
-import Screen from './app/components/Screen';
-import ImageInput from './app/components/ImageInput';
-import ImageInputList from './app/components/ImageInputList';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import theme from './app/navigation/theme';
+import AppNavigator from './app/navigation/AppNavigator';
 
 export default function App() {
-  return <ListingEdit />;
+  return (
+    <NavigationContainer theme={theme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({});
