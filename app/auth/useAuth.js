@@ -7,10 +7,10 @@ import authStorage from './storage';
 const useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  const login = (authToken) => {
+  const login = async (authToken) => {
     const user = jwtDecode(authToken);
     setUser(user);
-    autStorage.storeToken(authToken);
+    authStorage.storeToken(authToken);
   };
 
   const logout = () => {
