@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { StyleSheet, FlatList, Platform, View } from 'react-native';
 
 import Screen from '../components/Screen';
@@ -22,34 +22,37 @@ const Listings = ({ navigation }) => {
   }, []);
 
   return (
-    <Screen style={styles.screen}>
+    <Fragment>
       {error ? (
-        <Fragment>
+        <Screen style={styles.screen}>
           <View style={styles.error}>
             <AppText>Couldn't retrieve the listings.</AppText>
             <AppButton title='Retry' onPress={loadListings} />
           </View>
-        </Fragment>
+        </Screen>
       ) : (
         <Fragment>
           <ActivityIndicator visible={loading} />
-          <FlatList
-            data={listings}
-            keyExtractor={(listing) => listing.id.toString()}
-            renderItem={({ item }) => (
-              <Card
-                title={item.title}
-                subTitle={`$${item.price}`}
-                imageUrl={item.images[0].url}
-                onPress={() =>
-                  navigation.navigate(routes.LISTING_DETAILS, item)
-                }
-              />
-            )}
-          />
+          <Screen style={styles.screen}>
+            <FlatList
+              data={listings}
+              keyExtractor={(listing) => listing.id.toString()}
+              renderItem={({ item }) => (
+                <Card
+                  title={item.title}
+                  subTitle={`$${item.price}`}
+                  imageUrl={item.images[0].url}
+                  onPress={() =>
+                    navigation.navigate(routes.LISTING_DETAILS, item)
+                  }
+                  thumbnailUrl={item.images[0].thumbnailUrl}
+                />
+              )}
+            />
+          </Screen>
         </Fragment>
       )}
-    </Screen>
+    </Fragment>
   );
 };
 

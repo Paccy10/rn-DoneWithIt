@@ -6,6 +6,7 @@ import { ListItem, ListItemsSeparator } from '../components/lists';
 import Icon from '../components/Icon';
 import colors from '../config/colors';
 import routes from '../navigation/routes';
+import useAuth from '../auth/useAuth';
 
 const menuItems = [
   {
@@ -26,12 +27,14 @@ const menuItems = [
 ];
 
 const Account = ({ navigation }) => {
+  const { user, logout } = useAuth();
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title='Pacifique Clement Ndayisenga'
-          subTitle='pacifiqueclement@gmail.com'
+          title={user.name}
+          subTitle={user.email}
           image={require('../assets/mosh.jpg')}
         />
       </View>
@@ -57,6 +60,7 @@ const Account = ({ navigation }) => {
       <ListItem
         title='Log Out'
         IconComponent={<Icon name='logout' backgroundColor='#ffe66d' />}
+        onPress={() => logout()}
       />
     </Screen>
   );
